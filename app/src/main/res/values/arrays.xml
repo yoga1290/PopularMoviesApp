@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sortBy">
+        <item>top rated</item>
+        <item>popular</item>
+    </string-array>
+    <string-array name="sortBy_values">
+        <item>top_rated</item>
+        <item>popular</item>
+    </string-array>
+
+    <string-array name="pref_max_movie_records_entries">
+        <item>100</item>
+        <item>1000</item>
+        <item>10000</item>
+    </string-array>
+    <string-array name="pref_max_movie_records_values">
+        <item>100</item>
+        <item>1000</item>
+        <item>10000</item>
+    </string-array>
+</resources>

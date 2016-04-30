@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">PopularMoviesApp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="settings_sortby">settings_sortby</string>
+    <string name="action_sortByPopular">Sort By Popular</string>
+    <string name="action_sortByTopRated">Sort by top rated</string>
+    <string name="pref_max_movie_records_key">pref_max_movie_records_key</string>
+
+    <string name="account_type">dummy_account</string>
+    <string name="dummy_account_name">Sync Service</string>
+    <string name="contentAuthority">com.appspot.yoga1290.popularmoviesapp</string>
+    <string name="provider_label">provider_name</string>
+
+    <string name="post_sync_broadcast_reciever">com.appspot.yoga1290.popularmoviesapp.post_sync_broadcast_reciever</string>
+    <string name="post_review_sync_broadcast_reciever">com.appspot.yoga1290.popularmoviesapp.post_review_sync_broadcast_reciever</string>
+    <string name="pref_sync_frequency">pref_sync_frequency</string>
+    <string name="action_favorites">show Favorites</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

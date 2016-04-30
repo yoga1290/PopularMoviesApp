@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:title="Sort By"
+        android:key="@string/settings_sortby"
+        android:defaultValue="popular"
+        android:entries="@array/sortBy"
+        android:entryValues="@array/sortBy_values" />
+
+    <ListPreference
+        android:title="Maximum Records"
+        android:key="@string/pref_max_movie_records_key"
+        android:defaultValue="100"
+        android:entries="@array/pref_max_movie_records_entries"
+        android:entryValues="@array/pref_max_movie_records_values" />
+
+    <ListPreference
+        android:title="Sync frequency"
+        android:key="@string/pref_sync_frequency"
+        android:defaultValue="100"
+        android:entries="@array/pref_sync_frequency_titles"
+        android:entryValues="@array/pref_sync_frequency_values" />
+
+</PreferenceScreen>
