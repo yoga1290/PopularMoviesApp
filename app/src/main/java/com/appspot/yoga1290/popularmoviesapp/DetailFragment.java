@@ -1,18 +1,24 @@
 package com.appspot.yoga1290.popularmoviesapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.support.v7.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.appspot.yoga1290.popularmoviesapp.model.Movie;
@@ -21,6 +27,7 @@ import com.appspot.yoga1290.popularmoviesapp.model.Trailer;
 import com.appspot.yoga1290.popularmoviesapp.sync.PostReviewSyncBroadcastReciever;
 import com.appspot.yoga1290.popularmoviesapp.sync.SyncService;
 import com.appspot.yoga1290.popularmoviesapp.tasks.FetchMovieReviews;
+import com.appspot.yoga1290.popularmoviesapp.ui.OnMenuItemClickListener;
 import com.appspot.yoga1290.popularmoviesapp.ui.ReviewListAdapter;
 import com.appspot.yoga1290.popularmoviesapp.ui.TrailerListAdapter;
 import com.squareup.picasso.Picasso;
@@ -32,11 +39,12 @@ public class DetailFragment extends Fragment {
 
 
     private Movie movie;
+    private TrailerListAdapter trailerListAdapter;
     private ScrollView rootView;
     private PostReviewSyncBroadcastReciever postReviewSyncBroadcastReciever = null;
 
     public DetailFragment() {
-        // Required empty public constructor
+        setHasOptionsMenu(true);
     }
 
     public static DetailFragment newInstance(String movieId) {
@@ -52,6 +60,25 @@ public class DetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 //            mParam1 = getArguments().getString(DetailFragment.MOVIE_ID);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.detailfragment, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+
+        // Get the provider and hold onto it to set/change the share intent.
+        ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+
+        Trailer trailers[] = trailerListAdapter.getTrailers();
+        if (trailers.length > 0) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.youtube.com/watch?v=" + trailers[0].getKey());
+            Log.i(DetailFragment.class.getSimpleName(), "https://www.youtube.com/watch?v=" + trailers[0].getKey());
+            mShareActionProvider.setShareIntent(shareIntent);
         }
     }
 
@@ -129,7 +156,7 @@ public class DetailFragment extends Fragment {
                     .into(imageView);
 
             // init trailer list
-            TrailerListAdapter trailerListAdapter = new TrailerListAdapter(getContext(),
+            trailerListAdapter = new TrailerListAdapter(getContext(),
                     Trailer.findByMovieId(getActivity().getContentResolver(), movie.getId()));
             ListView trailersListView = (ListView)rootView.findViewById(R.id.listView_trailers);
             trailersListView.setAdapter(trailerListAdapter);
@@ -172,5 +199,4 @@ public class DetailFragment extends Fragment {
             getActivity().unregisterReceiver(postReviewSyncBroadcastReciever);
         }
     }
-
 }
